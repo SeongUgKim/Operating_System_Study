@@ -31,3 +31,19 @@
   - each running program has its own private mem (not sharing same physical memory)
 - each process accesses its own private virtual address space
   - os maps onto the physical memory of the machine
+
+## Concurrency
+
+- OS is juggling many things at once
+
+### Multi Threaded Programs
+
+- thread: as a function running with the same memory space as other functions, with more than one of them active at a time
+- in `thread.c`:
+  - each thread starts running in a routine (`worker`)
+  - with high number of `loops` => result = unusual value
+  - shared `counter` is incremented requires three instructions
+  1. load the value of the counter from memory into a register
+  2. increment
+  3. store it back to memory
+  - these three instructions do not execute atomically => problem of concurrency
