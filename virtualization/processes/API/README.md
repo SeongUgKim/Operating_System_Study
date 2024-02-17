@@ -78,3 +78,18 @@
 - ex)
 - `grep -o foo file | wc -l`
   - grab a word foo => using output and count word
+
+## Process Control and Users
+
+### Sending Signals to a Process
+
+- Beyond fokr(), exec(), and wait(), there are a lot of other interfaces for interacting with processes in UNIX system
+- `kill()` system call: used to send signals to a process, including directives to pause, die and other useful imperatives
+- signal subsystem => deliver external events to processes (receive, process, and send those signals within individual processes)
+  - to use this form of communication, a process should use the `signal()` system call to catch various signals
+  - ensure that when a particular signal is delivered to a process, it will suspend its normal execution and run a particular piece of code in response to the signal
+
+### Giving Control of Processes to Users
+
+- users generally can only control their own processes
+- job of os: parcel out resources (cpu, memory, and disk) to each user to meet overall system goals
