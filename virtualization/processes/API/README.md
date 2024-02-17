@@ -49,3 +49,32 @@
   - the heap, stck, and other parts of memory space of the program are re-initialized
   - then os simply runs that program => it does not create a new process, but it transforms the currently running program into a different running program
     - p3 -> wc
+
+## Motivating the API
+
+- separation of `fork()` and `exec()` is essential in building a UNIX shell
+- this separation lets the shell run code after the call to `fork()` but before the call to `exec()`
+  - able to alter the env of the about-to-be-run program
+  - enables a variety of interesting features to be readily built.
+
+1. shows a prompt and wait for user to type something into it
+2. after getting the input, shell figures out where in the file system the executable resides
+3. calls `fork()` to create a new child process to run the command
+4. calls some variant of `exec()` to run the command
+5. waits for the command to complete by calling `wait()`
+6. child completes, the shell returns from `wait()` and prints out a prompt again
+
+- ex)
+- `prompt > wc p3.c > newfile.txt`
+  - the way the shell accoomplishes this task is simple:
+  - child process is created, before calling `exec()`, the shell closes standard output and opens the file `newfile.txt`
+
+### Pipeline
+
+- UNIX pipes are implemented in a similar way but with the pipe() system call
+  - output of one process is connected to an in-kernel pipe, and the input of another process is connected to that same pipe
+  - the output of one process seamlessly is used as input to the next
+  - useful chains of commands
+- ex)
+- `grep -o foo file | wc -l`
+  - grab a word foo => using output and count word
