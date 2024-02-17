@@ -47,3 +47,21 @@
   2. increment
   3. store it back to memory
   - these three instructions do not execute atomically => problem of concurrency
+
+## Persistence
+
+- DRAM => volatile storage => data can be easily lost
+- need hardware & software to be able to store data persistently
+- hardware => I/O device, hard drive is common repo for long term info (also solid state drives (SSD))
+- software => file system
+- os does not create a private virtualized disk for each application
+
+### io.c
+
+- three system calls
+
+1. `open()`: opens the file and creates it
+2. `write()`: writes some data to the file
+3. `close()`: closes the file
+
+- these system calls are routed to the part of the os called `file system`
