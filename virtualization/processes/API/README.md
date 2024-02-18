@@ -93,3 +93,8 @@
 
 - users generally can only control their own processes
 - job of os: parcel out resources (cpu, memory, and disk) to each user to meet overall system goals
+- `Superuser (Root)`
+  - a user who can administer the system
+  - not limited in the way most users are
+  - able to run powerful commands such as `shutdown`
+  - with great power comes great responsibility => need to increase security
